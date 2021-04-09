@@ -68,5 +68,3 @@ for k = 4:1000
         writePosition(servo, angle);
     end
 end
-
-
