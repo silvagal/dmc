@@ -3,7 +3,6 @@ clear; clc; close all;
 %user settings
 ledPin = 'D8';
 servoPin = 'D7';
-deltaT_blink = 0.1;
 
 %%Matlab support package
 port = 'COM5';
@@ -67,14 +66,14 @@ for k = 3:temp
     u(k) = u(k-1) + deltaU(k);
     aux = duf(1:end-1);
     duf = [deltaU(k) aux];
-    y_angle = mapfun(ym(k), 0, 180, 0, 1)
+    signal = mapfun(u(k), 0, 180, 0, 1)
     %% Send position to servo
-    for angle = 0 : 1/180 : y_angle
+    for angle = 0 : 1/180 : signal
         writePosition(servo, angle);
     end
 end
 plot(u);
-title('lambda = 0.5')
+title('lambda = 1')
 xlabel('Período de amostragem');
 %ylabel('Sinal de Controle u'); 
 ylabel('Saída do sistema');
